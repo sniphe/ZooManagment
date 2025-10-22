@@ -34,9 +34,9 @@ namespace TricaricoZoo
         {
             double variazionePeso = CalcolaVariazionePesoPercentuale();
 
-            double sogliaOttimo = Eta < 5 ? 30 : 20;       // giovani tollerano +30%
-            double sogliaDiscreto = Eta > 20 ? -5 : -10;  // anziani diventano "Discreto" con -5%
-            double sogliaCritico = Eta > 25 ? -10 : -20;  // anziani diventano "Critico" prima
+            double sogliaOttimo = Eta < 5 ? 30 : 20;
+            double sogliaDiscreto = Eta > 20 ? -5 : -10;
+            double sogliaCritico = Eta > 25 ? -10 : -20;
 
             if (Eta > 25 || variazionePeso < sogliaCritico)
                 return "Critico";
