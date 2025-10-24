@@ -4,11 +4,19 @@ namespace TricaricoZoo
 {
     class Animale
     {
+        public enum StatoSalute
+        {
+            Ottimo,
+            Buono,
+            Discreto,
+            Critico
+        }
+
         public string Nome { get; set; }
         public string Specie { get; set; }
         public int Eta { get; set; }
         public double Peso { get; set; }
-        public string StatoDiSalute { get; set; } = "Buono";
+        public StatoSalute StatoAttuale { get; set; } = StatoSalute.Buono;
         public DateTime DataArrivo { get; set; }
 
         private double _pesoIniziale;
@@ -26,26 +34,15 @@ namespace TricaricoZoo
 
         private double CalcolaVariazionePesoPercentuale()
         {
-            if (_pesoIniziale <= 0) return 0;
-            return ((Peso - _pesoIniziale) / _pesoIniziale) * 100;
+            if (_pesoIniziale <= 0)
+                return 0;
+
+            return Math.Abs(((Peso - _pesoIniziale) / _pesoIniziale) * 100);
         }
 
-        private string DeterminaStatoSaluteAutomatico()
+        private StatoSalute DeterminaStatoSaluteAutomatico()
         {
-            double variazionePeso = CalcolaVariazionePesoPercentuale();
-
-            double sogliaOttimo = Eta < 5 ? 30 : 20;
-            double sogliaDiscreto = Eta > 20 ? -5 : -10;
-            double sogliaCritico = Eta > 25 ? -10 : -20;
-
-            if (Eta > 25 || variazionePeso < sogliaCritico)
-                return "Critico";
-            else if (variazionePeso < sogliaDiscreto || _numeroControlliVeterinari > 5)
-                return "Discreto";
-            else if (variazionePeso > sogliaOttimo)
-                return "Ottimo";
-            else
-                return "Buono";
+            return StatoAttuale;
         }
 
         public virtual double CalcolaCiboDiarioKg()
@@ -75,13 +72,13 @@ namespace TricaricoZoo
             }
 
             Peso = nuovoPeso;
-            StatoDiSalute = DeterminaStatoSaluteAutomatico();
+            StatoAttuale = DeterminaStatoSaluteAutomatico();
         }
 
         public void EffettuaControlloVeterinario()
         {
             _numeroControlliVeterinari++;
-            StatoDiSalute = DeterminaStatoSaluteAutomatico();
+            StatoAttuale = DeterminaStatoSaluteAutomatico();
         }
 
         public virtual void MostraInformazioni()
@@ -89,9 +86,10 @@ namespace TricaricoZoo
             Console.WriteLine($"\n[{Specie}] Nome: {Nome}");
             Console.WriteLine($"Età: {Eta} anni | Anni allo zoo: {AnniAlloZoo()}");
             Console.WriteLine($"Peso: {Peso} kg (Iniziale: {_pesoIniziale} kg, Variazione: {CalcolaVariazionePesoPercentuale():F1}%)");
-            Console.WriteLine($"Salute: {StatoDiSalute} | Controlli veterinari: {_numeroControlliVeterinari}");
+            Console.WriteLine($"Salute: {StatoAttuale} | Controlli veterinari: {_numeroControlliVeterinari}");
             Console.WriteLine($"Cibo giornaliero: {CalcolaCiboDiarioKg():F2} kg | Costo mensile: {CalcolaCostoGestioneMensile():F2}€");
             Console.WriteLine($"Verso: {EmettiVerso()}");
+            Console.WriteLine("\n\n\n\n");
         }
     }
 }
