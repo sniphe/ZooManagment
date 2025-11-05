@@ -19,7 +19,7 @@ class Program
         entity1.MostraInformazioni();
 
         //Pinguino
-        Pinguino entity2 = new Pinguino("Skipper", 8, 14.2, new DateTime(2018, 3, 10));
+        Pinguino entity2 = new Pinguino("Skipper", 8, 14.2, new DateTime(2018, 3, 10), 3, 4, 5, 0.5);
 
         entity2.MostraInformazioni();
 
