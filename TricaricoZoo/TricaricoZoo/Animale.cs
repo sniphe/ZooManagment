@@ -89,7 +89,6 @@ namespace TricaricoZoo
             Console.WriteLine($"Salute: {StatoAttuale} | Controlli veterinari: {_numeroControlliVeterinari}");
             Console.WriteLine($"Cibo giornaliero: {CalcolaCiboDiarioKg():F2} kg | Costo mensile: {CalcolaCostoGestioneMensile():F2}€");
             Console.WriteLine($"Verso: {EmettiVerso()}");
-            Console.WriteLine("\n\n\n\n");
         }
     }
 }

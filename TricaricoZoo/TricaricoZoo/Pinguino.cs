@@ -75,7 +75,7 @@ namespace TricaricoZoo
             Console.WriteLine($"Cibo giornaliero: {CalcolaCiboDiarioKg():F2} kg | Costo mensile: {CalcolaCostoGestioneMensile():F2}€");
             Console.WriteLine($"Velocità media di nuoto: {VelocitaNuotoKmH()} km/h");
             Console.WriteLine($"Verso: {EmettiVerso()}");
-            Console.WriteLine("\n\n\n\n");
+            Console.WriteLine("\n\n");
         }
     }
 }
